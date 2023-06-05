@@ -7,11 +7,12 @@ RUN echo "nodejs openjdk-8-jre git npm python3"
 RUN apt install -y sudo mc openssh-server screen bash 
 RUN addgroup mininode
 RUN adduser --inGroup mininode --shell /bin/sh mininode 
-RUN yes newpassword | passwd mininode 
+RUN echo "mininode:mininode" | chpasswd 
 RUN echo "mininode    ALL=(ALL) ALL" >> /etc/sudoers 
 WORKDIR "/tmp"
 RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.9.0/selenium-server-4.9.1.jar
 
+RUN systemctl enable ssh
 COPY etc/waiter.sh /etc/waiter.sh
 RUN chmod 777 -R /etc/waiter.sh
 ENTRYPOINT ["/bin/bash", "-c", "sleep 10000"]
