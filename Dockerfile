@@ -7,7 +7,7 @@ RUN echo "nodejs openjdk-8-jre git npm python3"
 RUN apt install -y sudo mc openssh-server screen bash 
 RUN addgroup mininode
 RUN adduser --inGroup mininode --shell /bin/sh mininode 
-RUN echo "mininode:mininode" | /usr/sbin/chpasswd 
+RUN yes newpassword | passwd mininode 
 RUN echo "mininode    ALL=(ALL) ALL" >> /etc/sudoers 
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
 RUN ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa
