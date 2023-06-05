@@ -1,10 +1,9 @@
 FROM ubuntu:latest
-MAINTAINER rcgcoder
 EXPOSE 22 4444 4442 4443 5556 5557 5559 5900 5901 5902 5903 9229 9230 9231 9232
 RUN apt upgrade
 RUN apt update
 
-RUN apk add sudo mc openssh-server screen bash nodejs openjdk8 git npm python3 
+RUN apt install sudo mc openssh-server screen bash nodejs openjdk8 git npm python3 
 RUN addgroup mininode
 RUN adduser  -G mininode -s /bin/sh -D mininode 
 RUN echo "mininode:mininode" | /usr/sbin/chpasswd 
