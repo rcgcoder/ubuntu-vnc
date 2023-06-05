@@ -12,9 +12,8 @@ RUN echo "mininode    ALL=(ALL) ALL" >> /etc/sudoers
 WORKDIR "/tmp"
 RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.9.0/selenium-server-4.9.1.jar
 
-RUN systemctl enable ssh
 COPY etc/waiter.sh /etc/waiter.sh
 RUN chmod 777 -R /etc/waiter.sh
 COPY etc/supervisord.conf /etc/supervisord_mininode.conf
 
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/tmp/supervisord_mininode.conf"]
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord_mininode.conf"]
