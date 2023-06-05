@@ -14,4 +14,4 @@ RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.9.0
 
 COPY etc/waiter.sh /etc/waiter.sh
 RUN chmod 777 -R /etc/waiter.sh
-ENTRYPOINT ["/bin/bash", "-c", "/etc/waiter.sh"]
+ENTRYPOINT ["/bin/bash", "-c", "sleep 10000"]
