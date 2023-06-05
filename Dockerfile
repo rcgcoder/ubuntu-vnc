@@ -3,9 +3,10 @@ EXPOSE 22 4444 4442 4443 5556 5557 5559 5900 5901 5902 5903 9229 9230 9231 9232
 RUN apt upgrade
 RUN apt update
 
-RUN apt install -y sudo mc openssh-server screen bash nodejs openjdk-8-jre git npm python3 
+RUN echo "nodejs openjdk-8-jre git npm python3" 
+RUN apt install -y sudo mc openssh-server screen bash 
 RUN addgroup mininode
-RUN adduser  -G mininode -s /bin/sh -D mininode 
+RUN adduser --inGroup mininode --shell /bin/sh mininode 
 RUN echo "mininode:mininode" | /usr/sbin/chpasswd 
 RUN echo "mininode    ALL=(ALL) ALL" >> /etc/sudoers 
 RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
