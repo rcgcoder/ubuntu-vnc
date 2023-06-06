@@ -8,7 +8,7 @@ RUN apt update
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN echo "nodejs openjdk-8-jre git npm python3" 
-RUN apt install -y sudo mc openssh-server screen bash supervisor apt-utils dialog tzdata openbox obmenu obconf xterm tigervnc-standalone-server
+RUN apt install -y sudo mc openssh-server screen bash supervisor apt-utils dialog tzdata openbox xterm tigervnc-standalone-server
 RUN addgroup mininode
 RUN adduser --inGroup mininode --shell /bin/sh mininode 
 RUN echo "mininode:mininode" | chpasswd 
