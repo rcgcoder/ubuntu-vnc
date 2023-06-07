@@ -17,6 +17,8 @@ COPY etc/waiter.sh /etc/waiter.sh
 RUN chmod 777 -R /etc/waiter.sh
 COPY etc/supervisord.conf /etc/supervisord_mininode.conf
 
+COPY addUserWithPassword /usr/bin/addUserWithPassword
+RUN chmod 777 -R /usr/bin/addUserWithPassword
 COPY runcontainer_vncserver /usr/bin/runcontainer_vncserver
 RUN chmod 777 -R /usr/bin/runcontainer_vncserver
 COPY containervncserver-setup.sh /usr/bin/containervncserver-setup.sh
