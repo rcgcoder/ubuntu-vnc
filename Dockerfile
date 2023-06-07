@@ -18,11 +18,20 @@ RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable 
 RUN apt-get update
 RUN apt-get install google-chrome-stable -y --no-install-recommends
 
-RUN echo "now nodejs and openjdk"
-RUN apt install -y nodejs openjdk-8-jre git npm python3
+RUN echo "now openjdk"
+RUN apt install -y openjdk-8-jre 
 
 RUN echo "selenium server for make a grid if we want"
 RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.9.0/selenium-server-4.9.1.jar
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+RUN apt-get update
+RUN apt -y install nodejs 
+RUN apt -y install gcc g++ make curl
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt update
+RUN apt install yarn
 
 COPY etc/waiter.sh /etc/waiter.sh
 RUN chmod 777 -R /etc/waiter.sh
