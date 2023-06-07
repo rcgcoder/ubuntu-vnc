@@ -9,14 +9,19 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN echo "nodejs openjdk-8-jre git npm python3" 
 RUN apt install -y sudo mc openssh-server screen bash supervisor apt-utils dialog tzdata openbox xterm tigervnc-standalone-server gnupg wget 
-RUN echo "now installing google chrome"
+
 WORKDIR "/tmp"
 
+RUN echo "now installing google chrome"
 RUN wget --quiet --output-document=- https://dl-ssl.google.com/linux/linux_signing_key.pub | gpg --dearmor > /etc/apt/trusted.gpg.d/google-archive.gpg
 RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 RUN apt-get update
 RUN apt-get install google-chrome-stable -y --no-install-recommends
 
+RUN echo "now nodejs and openjdk"
+RUN apt install -y nodejs openjdk-8-jre git npm python3
+
+RUN echo "selenium server for make a grid if we want"
 RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.9.0/selenium-server-4.9.1.jar
 
 COPY etc/waiter.sh /etc/waiter.sh
