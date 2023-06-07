@@ -9,3 +9,4 @@ rm /home/$username/.vnc/*.pid
 
 su -c 'vncserver -PasswordFile /home/$username/.vnc/passwd' $username
 
+
