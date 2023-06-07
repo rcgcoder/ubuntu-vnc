@@ -26,4 +26,4 @@ RUN chmod 777 -R /usr/bin/containervncserver-setup.sh
 COPY containervncserver-launchvnc.sh /usr/bin/containervncserver-launchvnc.sh
 RUN chmod 777 -R /usr/bin/containervncserver-launchvnc.sh
 
-ENTRYPOINT ["/bin/bash", "-c", "/usr/bin/runcontainer_vncserver"]
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord_mininode.conf"]
