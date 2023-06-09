@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  mininodejs:
+    image: rcgcoder/ubuntu-vnc:amd64
+    ports:
+      - "25900:5900"                            # vnc server :0
+      - "25901:5901"                            # vnc server :1
+      - "25902:5902"                            # vnc server 
+      - "25903:5903"                            # vnc server
+      - "25929:9229"                            # one por to debug main.js
+      - "25930:9230"							# each agent have a debug port
+      - "25931:9231"
+      - "25932:9232"
+      - "25933:9233"
+      - "24444:4444"
+      - "24442:4442"
+      - "24443:4443"
+      - "25556:5556"
+      - "25557:5557"
+      - "25559:5559"
+      - "25880:8080"							# the main.js is attached to port 8080 (https protocol)
+      - "25080:80"								# reserving the web normal ports for future use
+      - "25443:443"								#
+      - "25022:22"								# allowing ssh to make tunnels during the development
+    volumes:
+      - /usr/src/nodejs:/usr/src/app     
+      - /dev/shm:/dev/shm
+    environment:
+      - TimeZone=Europe/Madrid
+      - withUser=sae
+      - withPassword=sae
+      - withMail=change@thismail.com
+      - withDebug=--inspect-brk      
+    deploy:
+      replicas: 1								# in the future .... each container supports 4 agent... 4^replicas
