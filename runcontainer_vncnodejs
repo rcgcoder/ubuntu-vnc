@@ -1,0 +1,18 @@
+#!/bin/bash
+echo user passed $withUser - password $withPassword
+export ENV_USER=${withUser:-sae}
+export ENV_PASSWORD=${withPassword:-$ENV_USER}
+
+/usr/bin/containervncnodejs-setup.sh
+
+rm -rf /tmp/.X11-unix
+rm -rf /tmp/.X*-lock
+
+if [ "x$1" != "xnoSupervisor" ]; then
+	echo "running supervisor"
+	screen service pcscd start
+	/usr/bin/containervncserver-launchvnc.sh $ENV_USER
+	/usr/bin/supervisord -c /etc/supervisord.conf
+else
+	echo "Not running supervisor"
+fi

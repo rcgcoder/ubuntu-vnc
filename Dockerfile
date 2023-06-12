@@ -24,6 +24,7 @@ RUN apt install -y openjdk-8-jre curl
 RUN echo "selenium server for make a grid if we want"
 RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.9.0/selenium-server-4.9.1.jar
 
+RUN echo "NODEJS 14"
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 RUN apt-get update
 RUN apt -y install nodejs 
@@ -33,9 +34,11 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt update
 RUN apt install yarn
 
+RUN apt-get install -y curl zenity xdotool libaio1 expect chromium-chromedriver
+
 COPY etc/waiter.sh /etc/waiter.sh
 RUN chmod 777 -R /etc/waiter.sh
-COPY etc/supervisord.conf /etc/supervisord_mininode.conf
+COPY etc/supervisord.conf /etc/supervisord_vncnodejs.conf
 
 COPY addUserWithPassword /usr/bin/addUserWithPassword
 RUN chmod 777 -R /usr/bin/addUserWithPassword
@@ -46,4 +49,16 @@ RUN chmod 777 -R /usr/bin/containervncserver-setup.sh
 COPY containervncserver-launchvnc.sh /usr/bin/containervncserver-launchvnc.sh
 RUN chmod 777 -R /usr/bin/containervncserver-launchvnc.sh
 
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord_mininode.conf"]
+COPY runcontainer_vncnodejs /usr/bin/runcontainer_vncnodejs
+RUN chmod 777 -R /usr/bin/runcontainer_vncnodejs
+COPY containervncnodejs-setup.sh /usr/bin/containervncnodejs-setup.sh
+RUN chmod 777 -R /usr/bin/containervncnodejs-setup.sh
+
+RUN mkdir -p /usr/src/app
+COPY nodejsExpressHelloWorld.js /usr/src/app/main.js
+RUN chmod 777 -R /usr/src/app/main.js
+
+WORKDIR "/usr/src/app"
+RUN npm install express
+
+ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord_vncnodejs.conf"]
