@@ -61,4 +61,4 @@ RUN chmod 777 -R /usr/bin/runcontainer_vncnodejs
 COPY containervncnodejs-setup.sh /usr/bin/containervncnodejs-setup.sh
 RUN chmod 777 -R /usr/bin/containervncnodejs-setup.sh
 
-ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+ENTRYPOINT ["/bin/bash", "-c", "/usr/bin/runcontainer_vncnodejs"]

@@ -3,6 +3,7 @@ echo user passed $withUser - password $withPassword
 export ENV_USER=${withUser:-sae}
 export ENV_PASSWORD=${withPassword:-$ENV_USER}
 export ENV_WITHDEBUG=${withDebug:-""}
+
 /usr/bin/containervncserver-setup.sh
 
 export updatedRunNodeServer="/home/$ENV_USER/updatedRunNodeServer"
