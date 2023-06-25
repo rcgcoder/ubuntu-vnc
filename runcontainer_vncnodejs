@@ -10,9 +10,9 @@ rm -rf /tmp/.X*-lock
 
 if [ "x$1" != "xnoSupervisor" ]; then
 	echo "running supervisor"
-	screen service pcscd start
-	/usr/bin/containervncserver-launchvnc.sh $ENV_USER
-	/usr/bin/supervisord -c /etc/supervisord.conf
+	#screen service pcscd start
+	#/usr/bin/containervncserver-launchvnc.sh $ENV_USER
+	#/usr/bin/supervisord -c /etc/supervisord.conf
 else
 	echo "Not running supervisor"
 fi
