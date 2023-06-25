@@ -36,6 +36,13 @@ RUN apt install yarn
 
 RUN apt-get install -y curl zenity xdotool libaio1 expect chromium-chromedriver
 
+RUN mkdir -p /usr/src/app
+COPY nodejsExpressHelloWorld.js /usr/src/app/main.js
+RUN chmod 777 -R /usr/src/app/main.js
+
+WORKDIR "/usr/src/app"
+RUN npm install express
+
 COPY etc/waiter.sh /etc/waiter.sh
 RUN chmod 777 -R /etc/waiter.sh
 COPY etc/supervisord.conf /etc/supervisord.conf
@@ -53,12 +60,5 @@ COPY runcontainer_vncnodejs /usr/bin/runcontainer_vncnodejs
 RUN chmod 777 -R /usr/bin/runcontainer_vncnodejs
 COPY containervncnodejs-setup.sh /usr/bin/containervncnodejs-setup.sh
 RUN chmod 777 -R /usr/bin/containervncnodejs-setup.sh
-
-RUN mkdir -p /usr/src/app
-COPY nodejsExpressHelloWorld.js /usr/src/app/main.js
-RUN chmod 777 -R /usr/src/app/main.js
-
-WORKDIR "/usr/src/app"
-RUN npm install express
 
 ENTRYPOINT ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
