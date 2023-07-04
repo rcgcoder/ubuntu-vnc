@@ -34,7 +34,16 @@ RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources
 RUN apt update
 RUN apt install yarn
 
-RUN apt-get install -y curl zenity xdotool libaio1 expect chromium-chromedriver
+RUN echo "NODEJS 16"
+RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt -y install nodejs
+RUN npm install -g npm@*  
+
+RUN apt-get install -y zenity xdotool libaio1 expect chromium-chromedriver
+RUN npm install -g chromedriver  
+
 
 RUN mkdir -p /usr/src/app
 COPY nodejsExpressHelloWorld.js /usr/src/app/main.js
