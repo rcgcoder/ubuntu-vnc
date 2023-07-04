@@ -42,7 +42,7 @@ RUN apt -y install nodejs
 RUN npm install -g npm@*  
 
 RUN apt-get install -y zenity xdotool libaio1 expect chromium-chromedriver
-RUN npm install -g chromedriver  
+RUN npm install -f -g chromedriver  
 
 
 RUN mkdir -p /usr/src/app
