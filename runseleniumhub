@@ -1,0 +1,2 @@
+#!/bin/bash
+java -jar /tmp/selenium-server-4.10.0.jar hub
