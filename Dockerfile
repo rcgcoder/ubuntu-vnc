@@ -22,7 +22,7 @@ RUN echo "now openjdk"
 RUN apt install -y openjdk-8-jre curl 
 
 RUN echo "selenium server for make a grid if we want"
-RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.10.0/selenium-server-4.10.1.jar
+RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.10.0/selenium-server-4.10.0.jar
 
 RUN echo "NODEJS 14"
 RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
