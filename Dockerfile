@@ -24,22 +24,14 @@ RUN apt install -y openjdk-8-jre curl
 RUN echo "selenium server for make a grid if we want"
 RUN wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.10.0/selenium-server-4.10.0.jar
 
-RUN echo "NODEJS 14"
-RUN curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+RUN echo "install nodejs 18"
 RUN apt-get update
-RUN apt -y install nodejs 
-RUN apt -y install gcc g++ make 
-RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt update
-RUN apt install yarn
-
-RUN echo "NODEJS 16"
-RUN curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+RUN apt-get install -y ca-certificates curl gnupg
+RUN mkdir -p /etc/apt/keyrings
+RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 RUN apt-get update
-RUN apt-get -y upgrade
-RUN apt -y install nodejs
-RUN npm install -g npm@*  
+RUN apt-get install nodejs -y
 
 RUN apt-get install -y zenity xdotool libaio1 expect chromium-chromedriver
 RUN npm install -f -g chromedriver  
